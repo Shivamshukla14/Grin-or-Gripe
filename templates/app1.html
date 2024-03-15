@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentiment Analysis (Pickle Model)</title>
+</head>
+<body>
+    <h1>Sentiment Analysis using Pickle Model</h1>
+    <form method="POST" action="/services/app1/predict">
+        <label for="tweet">Enter your tweet:</label>
+        <textarea name="tweet" id="tweet" rows="5" cols="30"></textarea><br>
+        <input type="submit" value="Analyze Sentiment">
+    </form>
+    {% if sentiment %}
+        <p>The sentiment of your tweet is: <strong>{{ sentiment }}</strong></p>
+    {% endif %}
+</body>
+</html>

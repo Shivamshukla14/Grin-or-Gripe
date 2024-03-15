@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Analysis - App 3</title>
+  </head>
+<body>
+  <h1>Text Analysis - App 3</h1>
+  <p>**OR** Paste your text in the box below and click "Analyze Text":</p>
+  <form method="POST" action="/app3/analyse">
+    <label for="rawtext">Text to Analyze:</label>
+    <textarea id="rawtext" name="rawtext" rows="10"></textarea>
+    <button type="submit">Analyze Text</button>
+  </form>
+
+  <div id="analysis-results">
+    </div>
+
+    <script>
+        // You can add JavaScript code here to handle form submission or other interactive elements (optional)
+        const form = document.querySelector('form');
+        const analysisResultsDiv = document.getElementById('analysis-results');
+        
+        form.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent default form submission behavior
+        
+        const formData = new FormData(form);
+        const rawtext = formData.get('rawtext');
+        
+        // Send a fetch request to the Flask route for analysis
+        fetch('/app3/analyse', {
+            method: 'POST',
+            body: formData,
+        })
+            .then(response => response.text())
+            .then(responseHtml => {
+            analysisResultsDiv.innerHTML = responseHtml; // Update results section
+            })
+            .catch(error => {
+            console.error('Error:', error);
+            // Handle any errors here (e.g., display an error message to the user)
+            });
+        });
+        
+    </script>
+</body>
+</html>

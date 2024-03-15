@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentiment Analysis (Transformer Model)</title>
+</head>
+<body>
+    <h1>Sentiment Analysis using Transformer Model</h1>
+    {% if model_error %}
+        <p>Error: An error occurred while loading the sentiment analysis model. Please try again later.</p>
+    {% else %}
+        <form method="POST" action="/services/app2/">
+            <label for="tweet">Enter your tweet:</label>
+            <textarea name="tweet" id="tweet" rows="5" cols="30"></textarea><br>
+            <input type="submit" value="Analyze Sentiment">
+        </form>
+        {% if sentiment_results %}
+            <h2>Sentiment Analysis Results:</h2>
+            <ul>
+                {% for label, score in sentiment_results %}
+                    <li>{{ label }}: {{ score }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
